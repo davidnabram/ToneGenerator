@@ -81,13 +81,13 @@ class Song(object):
             for i in range(self.bars):                
                 frequency,kind=choice(self.key)                
                 frequencies=get_chord(frequency,kind=kind,numNotes=3)
-                print ('frequencies = %s') % frequencies
+                print (('frequencies = %s') % frequencies)
                 valueList = np.append(valueList,tone(frequencies,self.chord_length,self.bitrate))                
         else:
             for i in range(self.bars):
                 for j in range(self.num):
                     frequency,kind=choice(self.key)                                    
-                    print ('frequency = %s') % frequency
+                    print (('frequency = %s') % frequency)
                     valueList = np.append(valueList,tone([frequency],self.length,self.bitrate))                                  
         self.trackValues.append(valueList)
 
