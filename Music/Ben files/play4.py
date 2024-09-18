@@ -21,12 +21,12 @@ key_intervals={'M':[(2,'m'),(2,'m'),(1,'M'),(2,'M'),(2,'m'),(2,'dim'),(1,'M')],
 
 def get_chord(rootfreq,kind='M',numNotes=4):
     chord=[rootfreq]
-    for i in xrange(numNotes-1):
+    for i in range(numNotes-1):
         chord.append(chord[-1]*pow(half,chord_intervals[kind][i]))
     return chord
 def get_scale(rootfreq,kind='M',octaves=1):
     key=[(rootfreq,kind)]
-    for i in xrange(octaves):
+    for i in range(octaves):
         for (j,k) in key_intervals[kind]:
             key.append((key[-1][0]*pow(half,j),k))            
     return key
@@ -78,14 +78,14 @@ class Song(object):
         valueList=np.array([])
         
         if chords:
-            for i in xrange(self.bars):                
+            for i in range(self.bars):                
                 frequency,kind=choice(self.key)                
                 frequencies=get_chord(frequency,kind=kind,numNotes=3)
                 print ('frequencies = %s') % frequencies
                 valueList = np.append(valueList,tone(frequencies,self.chord_length,self.bitrate))                
         else:
-            for i in xrange(self.bars):
-                for j in xrange(self.num):
+            for i in range(self.bars):
+                for j in range(self.num):
                     frequency,kind=choice(self.key)                                    
                     print ('frequency = %s') % frequency
                     valueList = np.append(valueList,tone([frequency],self.length,self.bitrate))                                  
