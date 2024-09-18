@@ -1,7 +1,7 @@
 import math
 import pyaudio
 import numpy as np
-from graph import letterFreqPlot
+# from graph import letterFreqPlot
 
 def tone(FrequencyList, length, BITRATE):
     NumberOfFrames = int(BITRATE * length)
