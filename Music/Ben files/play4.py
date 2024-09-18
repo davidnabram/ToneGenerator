@@ -76,7 +76,7 @@ class Song(object):
         self.WAVEDATA = bytearray(songValues)
             
         
-    def get_track(self,chords=False):
+    def get_track(self,chords=False, notes_per_beat=1):
         valueList=np.array([])
         
         if chords:
@@ -87,23 +87,16 @@ class Song(object):
                 valueList = np.append(valueList,tone(frequencies,self.chord_length,self.bitrate))                
         else:
             for i in range(self.bars):
-                for j in range(self.num):
+                for j in range(self.num*notes_per_beat):
                     frequency,kind=choice(self.key)                                    
                     print (('frequency = %s') % frequency)
-                    valueList = np.append(valueList,tone([frequency],self.length,self.bitrate))                                  
+                    valueList = np.append(valueList,tone([frequency],self.length/notes_per_beat,self.bitrate))                                  
         self.trackValues.append(valueList)
 
     
 root=noteValues['c',5]
-mySong=Song(get_scale(root,kind='M',octaves=1),8,tempo=120,num=4,denom=4)
-mySong.get_track()
+mySong=Song(get_scale(root,kind='M',octaves=1), 16, tempo=120, num=4, denom=4)
+mySong.get_track(notes_per_beat=2)
 mySong.get_track(chords=True)
 # import ipdb; ipdb.set_trace()
 mySong.play_song()
-
-
-
-
-
-###
-
