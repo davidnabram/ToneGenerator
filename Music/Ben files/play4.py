@@ -55,7 +55,8 @@ class Song(object):
         self.convert_to_wavedata()
         
         
-        stream.write(self.WAVEDATA)
+        # stream.write(self.WAVEDATA)
+        stream.write(bytes(self.WAVEDATA))
         stream.stop_stream()
         stream.close()
         p.terminate()
@@ -71,7 +72,8 @@ class Song(object):
         
     def convert_to_wavedata(self):
         songValues = [int(i) for i in self.songValues]
-        self.WAVEDATA = ''.join(chr(i) for i in songValues)
+        # self.WAVEDATA = ''.join(chr(i) for i in songValues)
+        self.WAVEDATA = bytearray(songValues)
             
         
     def get_track(self,chords=False):
@@ -96,6 +98,7 @@ root=noteValues['c',5]
 mySong=Song(get_scale(root,kind='M',octaves=1),8,tempo=120,num=4,denom=4)
 mySong.get_track()
 mySong.get_track(chords=True)
+# import ipdb; ipdb.set_trace()
 mySong.play_song()
 
 
